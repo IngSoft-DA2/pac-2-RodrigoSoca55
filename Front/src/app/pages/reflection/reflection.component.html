@@ -1,0 +1,28 @@
+<div>
+  <h1>Reflexión</h1>
+  
+  <p>Contador de visitas: {{ currentCounter }} / 20</p>
+
+  <button (click)="loadImporters()" [disabled]="state.isLoading">
+    {{ state.isLoading ? 'Buscando' : 'Buscar DLLs con Importers' }}
+  </button>
+
+  <div *ngIf="state.isLoading">
+    <p>Buscando</p>
+  </div>
+
+  <div *ngIf="state.hasError">
+    <p>Error: {{ state.errorMessage || 'Ocurrió un error al cargar los importers.' }}</p>
+  </div>
+
+  <div *ngIf="state.isEmpty && !state.isLoading && !state.hasError">
+    <p>No se encontraron DLLs.</p>
+  </div>
+
+  <div *ngIf="dlls.length > 0 && !state.isLoading && !state.hasError">
+    <h3>DLLs encontradas:</h3>
+    <ul>
+      <li *ngFor="let dll of dlls">{{ dll }}</li>
+    </ul>
+  </div>
+</div>
